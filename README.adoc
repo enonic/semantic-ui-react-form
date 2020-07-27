@@ -3,6 +3,10 @@
 
 == Changelog
 
+=== 1.0.0
+
+* Upgraded to semantic-ui-react-1.0.0
+
 === 0.0.6
 
 * validateOnInit synchronously with useRef before first render
