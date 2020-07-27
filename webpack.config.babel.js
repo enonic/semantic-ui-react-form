@@ -169,4 +169,49 @@ const ESM_CONFIG = {
 
 // ──────────────────────────────────────────────────────────────────────────────
 
-export default [UMD_CONFIG, CJS_CONFIG, ESM_CONFIG];
+const EXAMPLE_ESM_CONFIG = {
+  context: path.resolve(__dirname, 'example'),
+  entry: {
+    index: './index.jsx'
+  },
+  devtool: DEVTOOL,
+  mode: MODE,
+  module: {
+    rules: [
+      {
+        test: TEST,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              babelrc: false, // The .babelrc file should only be used to transpile config files.
+              comments: false,
+              compact: false,
+              minified: false,
+              plugins: [
+                'array-includes',
+                '@babel/plugin-proposal-object-rest-spread',
+                '@babel/plugin-transform-object-assign'
+              ],
+              presets: BABEL_PRESETS
+            } // options
+          }
+        ]
+      }
+    ]
+  },
+  performance: PERFORMANCE,
+  output: {
+    path: path.join(__dirname, 'example'),
+    filename: '[name].esm.js',
+    library: 'LIB',
+    libraryTarget: 'var'
+  },
+  plugins: [new EsmWebpackPlugin()],
+  resolve: RESOLVE
+};
+
+// ──────────────────────────────────────────────────────────────────────────────
+
+export default [UMD_CONFIG, CJS_CONFIG, ESM_CONFIG, EXAMPLE_ESM_CONFIG];
