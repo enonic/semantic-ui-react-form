@@ -175,7 +175,7 @@ const EXAMPLE_ESM_CONFIG = {
     index: './index.jsx'
   },
   devtool: DEVTOOL,
-  mode: MODE,
+  mode: 'development',
   module: {
     rules: [
       {
