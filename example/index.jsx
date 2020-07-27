@@ -1,4 +1,5 @@
 import {
+  Dropdown,
   Form,
   Input
 } from '../src';
@@ -8,7 +9,7 @@ function required(value) {
 }
 
 const SCHEMA = {
-	name: (v) => required(v)
+	anInput: (v) => required(v)
 };
 
 export function Example() {
@@ -31,8 +32,23 @@ export function Example() {
   >
     <Input
       fluid
-      label='Name'
-      path='name'
+      label='An input'
+      name='anInput'
+    />
+    <Dropdown
+      fluid
+      name='aDropDown'
+      options={[{
+        key: 'anOption',
+        text: 'An option',
+        value: 'anOption'
+      },{
+        key: 'anotherOption',
+        text: 'Another option',
+        value: 'anotherOption'
+      }]}
+      placeholder='A placeholder'
+      selection
     />
   </Form>;
 }
