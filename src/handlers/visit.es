@@ -1,9 +1,9 @@
-import cloneDeep from 'lodash.clonedeep';
 // import deepEqual from 'fast-deep-equal';
 // import getIn from 'get-value';
 import setIn from 'set-value';
 
 import {validateForm} from './validateForm';
+import { deReference } from '../utils/deReference';
 
 
 export function visit({
@@ -30,7 +30,7 @@ export function visit({
     return state;
   } */
 
-  const deref = cloneDeep(state);
+  const deref = deReference(state);
   setIn(deref.visits, path, value);
   // console.debug('reducer action', action, 'state', state, 'deref', deref);
   afterVisit(deref);

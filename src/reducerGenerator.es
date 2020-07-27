@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-import cloneDeep from 'lodash.clonedeep';
 import deepEqual from 'fast-deep-equal';
 import getIn from 'get-value';
 import setIn from 'set-value';
@@ -28,6 +27,7 @@ import { validateForm } from './handlers/validateForm';
 import { visit } from './handlers/visit';
 import { setValue } from './handlers/setValue';
 import { isFunction } from './utils/isFunction';
+import { deReference } from './utils/deReference';
 
 
 export function reducerGenerator({
@@ -43,7 +43,7 @@ export function reducerGenerator({
     switch (action.type) {
       case DELETE_ITEM: {
         // console.debug('reducer state', state, 'action', action);
-        const deref = cloneDeep(state);
+        const deref = deReference(state);
         const array = getIn(deref.values, action.path);
         // console.debug('reducer state', state, 'action', action, 'array', array);
         if (!Array.isArray(array)) {
@@ -58,7 +58,7 @@ export function reducerGenerator({
       }
       case INSERT: {
         // console.debug('reducer state', state, 'action', action);
-        const deref = cloneDeep(state);
+        const deref = deReference(state);
         const array = getIn(deref.values, action.path);
         // console.debug('reducer state', state, 'action', action, 'array', array);
         if (!Array.isArray(array)) {
@@ -73,7 +73,7 @@ export function reducerGenerator({
         return deref;
       }
       case MOVE_DOWN: {
-        const deref = cloneDeep(state);
+        const deref = deReference(state);
         const array = getIn(deref.values, action.path);
         if (!Array.isArray(array)) {
           console.error(`path: ${action.path}, not an array!`);
@@ -93,7 +93,7 @@ export function reducerGenerator({
         return deref;
       }
       case MOVE_UP: {
-        const deref = cloneDeep(state);
+        const deref = deReference(state);
         const array = getIn(deref.values, action.path);
         if (!Array.isArray(array)) {
           console.error(`path: ${action.path}, not an array!`);
@@ -113,7 +113,7 @@ export function reducerGenerator({
         return deref;
       }
       /* case PUSH: {
-        const deref = cloneDeep(state);
+        const deref = deReference(state);
         const array = getIn(deref.values, action.path);
         if (!Array.isArray(array)) {
           return state;
@@ -137,7 +137,7 @@ export function reducerGenerator({
           // console.debug('reducer action', action, 'did not change state', state);
           return state;
         }
-        const deref = cloneDeep(state);
+        const deref = deReference(state);
         setIn(deref.errors, action.path, action.error);
         // console.debug('reducer action', action, 'state', state, 'deref', deref);
         return deref;
@@ -145,7 +145,7 @@ export function reducerGenerator({
       case SET_SCHEMA: {
         // console.debug('reducer action', action);
         const { path, schema } = action;
-        const deref = cloneDeep(state);
+        const deref = deReference(state);
         setIn(deref.schema, path, schema);
         // console.debug('reducer action', action, 'state', state, 'deref', deref);
         return deref;
@@ -161,7 +161,7 @@ export function reducerGenerator({
         return visit({action, afterValidate, afterVisit, state});
       }
       case SORT: {
-        const deref = cloneDeep(state);
+        const deref = deReference(state);
         const array = getIn(deref.values, action.path);
         if (!Array.isArray(array)) {
           console.error(`path: ${action.path}, not an array!`);
@@ -190,7 +190,7 @@ export function reducerGenerator({
           // console.debug('reducer action', action, 'did not change state', state);
           return state;
         }
-        const deref = cloneDeep(state);
+        const deref = deReference(state);
         setIn(deref.errors, action.path, error);
         // console.debug('reducer action', action, 'deref', deref);
         afterValidate(deref);
@@ -206,7 +206,7 @@ export function reducerGenerator({
         });
       }
       case VISIT_ALL: {
-        const deref = cloneDeep(state);
+        const deref = deReference(state);
         traverse(state.schema).forEach(function(x) {
           // fat-arrow destroys this
           if (this.notRoot && this.isLeaf && isFunction(x)) {

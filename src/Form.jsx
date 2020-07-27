@@ -58,12 +58,12 @@ Let's consider option 1:
 . Any user activity in child form, needs to update root form...
 */
 
-import cloneDeep from 'lodash.clonedeep';
 // import {Form as SemanticUiReactForm} from 'semantic-ui-react';
 import { EnonicProvider } from './Context';
 import { reducerGenerator } from './reducerGenerator';
 import { validateForm } from './handlers/validateForm';
 import { isFunction } from './utils/isFunction';
+import { deReference } from './utils/deReference';
 
 
 export function Form(props) {
@@ -90,10 +90,10 @@ export function Form(props) {
   } = props;
 
   // const initialSchema = props.schema ? props.schema : {}; // warning no deref!
-  const initialSchema = props.schema ? cloneDeep(props.schema) : {}; // deref
+  const initialSchema = props.schema ? deReference(props.schema) : {}; // deref
   // console.debug('Form initialSchema', initialSchema);
 
-  const initialValues = cloneDeep(
+  const initialValues = deReference(
     isFunction(props.initialValues)
       ? props.initialValues()
       : props.initialValues

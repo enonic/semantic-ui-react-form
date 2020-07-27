@@ -1,9 +1,9 @@
-import cloneDeep from 'lodash.clonedeep';
 import getIn from 'get-value';
 import setIn from 'set-value';
 import traverse from 'traverse';
 
 import { isFunction } from '../utils/isFunction';
+import { deReference } from '../utils/deReference';
 
 
 export function validateForm({
@@ -16,7 +16,7 @@ export function validateForm({
 }) {
   // console.debug('validateForm visitAllFields', visitAllFields, 'state', state);
   // const {visitAllFields = false} = action;
-  const deref = cloneDeep(state);
+  const deref = deReference(state);
   const errors = {}; // forgetting old errors here
   traverse(state.schema).forEach(function(x) {
     // fat-arrow destroys this

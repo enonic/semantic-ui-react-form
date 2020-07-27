@@ -35,3 +35,5 @@ export {VisitAllButton} from './buttons/VisitAllButton';
 export {Checkbox} from './inputs/Checkbox';
 export {Dropdown} from './inputs/Dropdown';
 export {Input} from './inputs/Input';
+
+export {deReference} from './utils/deReference';
