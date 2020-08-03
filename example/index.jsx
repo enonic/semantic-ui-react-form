@@ -69,17 +69,17 @@ export function Example() {
 				</List>
 				<EnonicForm
 			    afterValidate={(dereffed) => {
-			      console.debug('Collection afterValidate dereffed', dereffed);
+			      //console.debug('Collection afterValidate dereffed', dereffed);
 			    }}
 			    afterVisit={(dereffed) => {
-			      console.debug('Collection afterVisit dereffed', dereffed);
+			      //console.debug('Collection afterVisit dereffed', dereffed);
 			    }}
 			    initialValues={initialValues}
 			    onChange={(values) => {
-						console.debug('Collection onChange values', values);
+						//console.debug('Collection onChange values', values);
 					}}
 			    onSubmit={(values) => {
-						console.debug('submit values', values);
+						//console.debug('submit values', values);
 			    }}
 			    schema={SCHEMA}
 			  >

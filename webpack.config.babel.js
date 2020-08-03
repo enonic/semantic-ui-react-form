@@ -1,5 +1,6 @@
 import path from 'path';
 import EsmWebpackPlugin from '@purtuga/esm-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 
 // ──────────────────────────────────────────────────────────────────────────────
@@ -208,7 +209,18 @@ const EXAMPLE_ESM_CONFIG = {
     library: 'LIB',
     libraryTarget: 'var'
   },
-  plugins: [new EsmWebpackPlugin()],
+  plugins: [
+    new EsmWebpackPlugin(),
+    new CopyPlugin({
+      patterns: [
+        { from: '../node_modules/@babel/standalone/babel.js', to: './' },
+        { from: '../node_modules/react/umd/react.development.js', to: './' },
+        { from: '../node_modules/react-dom/umd/react-dom.development.js', to: './' },
+        { from: '../node_modules/semantic-ui-css/semantic.css', to: './semantic-ui-css/' },
+        { from: '../node_modules/semantic-ui-css/themes', to: './semantic-ui-css/themes' }
+      ]
+    })
+  ],
   resolve: RESOLVE
 };
 

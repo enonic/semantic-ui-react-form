@@ -1,3 +1,7 @@
 /dist/
+/example/babel.js
+/example/index.esm.js
+/example/react*
+/example/semantic*
 /node_modules/
 /*.tgz

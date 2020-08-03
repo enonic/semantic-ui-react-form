@@ -1,7 +1,15 @@
 = Semantic-UI react form
 :toc: right
 
+== How to test locally
+
+  npx webpack && npx http-server example
+
 == Changelog
+
+=== 1.1.0
+
+* Upgraded to semantic-ui-react-1.0.0
 
 === 1.0.0
 
