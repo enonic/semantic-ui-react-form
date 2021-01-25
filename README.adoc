@@ -7,10 +7,11 @@
 
 == Changelog
 
-=== 1.1.2
+=== 2.0.3
 
 * Node 14.15.4
 * Upgrade node modules (patch, minor)
+* Upgraded to semantic-ui-react-2.0.3
 
 === 1.1.0
 
