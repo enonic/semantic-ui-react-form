@@ -10,7 +10,7 @@
 === 1.1.2
 
 * Node 14.15.4
-* Upgrade node modules (patch)
+* Upgrade node modules (patch, minor)
 
 === 1.1.0
 
