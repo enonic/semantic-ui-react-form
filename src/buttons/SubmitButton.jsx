@@ -1,8 +1,8 @@
 import {Button, Icon} from 'semantic-ui-react';
 import traverse from 'traverse';
 
-import {getEnonicContext} from '../Context';
-import {submit} from '../actions';
+import {getEnonicContext} from '../Context.jsx';
+import {submit} from '../actions.es';
 
 
 export function SubmitButton(/* props */) {

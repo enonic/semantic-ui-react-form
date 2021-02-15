@@ -1,7 +1,7 @@
 import {Button, Icon} from 'semantic-ui-react';
 
-import {getEnonicContext} from '../Context';
-import {visitAll} from '../actions';
+import {getEnonicContext} from '../Context.jsx';
+import {visitAll} from '../actions.es';
 
 
 export function VisitAllButton(props) {

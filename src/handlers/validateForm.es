@@ -2,8 +2,8 @@ import getIn from 'get-value';
 import setIn from 'set-value';
 import traverse from 'traverse';
 
-import { isFunction } from '../utils/isFunction';
-import { deReference } from '../utils/deReference';
+import { isFunction } from '../utils/isFunction.es';
+import { deReference } from '../utils/deReference.es';
 
 
 export function validateForm({

@@ -2,8 +2,8 @@
 // import getIn from 'get-value';
 import setIn from 'set-value';
 
-import {validateForm} from './validateForm';
-import { deReference } from '../utils/deReference';
+import {validateForm} from './validateForm.es';
+import { deReference } from '../utils/deReference.es';
 
 
 export function visit({

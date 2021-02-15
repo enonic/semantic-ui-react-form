@@ -21,13 +21,13 @@ import {
   // VALIDATE_FIELD,
   VALIDATE_FORM,
   VISIT_ALL
-} from './actions';
+} from './actions.es';
 
-import { validateForm } from './handlers/validateForm';
-import { visit } from './handlers/visit';
-import { setValue } from './handlers/setValue';
-import { isFunction } from './utils/isFunction';
-import { deReference } from './utils/deReference';
+import { validateForm } from './handlers/validateForm.es';
+import { visit } from './handlers/visit.es';
+import { setValue } from './handlers/setValue.es';
+import { isFunction } from './utils/isFunction.es';
+import { deReference } from './utils/deReference.es';
 
 
 export function reducerGenerator({

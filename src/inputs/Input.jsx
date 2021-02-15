@@ -5,7 +5,7 @@ import {
 	Message
 } from 'semantic-ui-react';
 
-import {getEnonicContext} from '../Context';
+import {getEnonicContext} from '../Context.jsx';
 import {
 	setValue,
 	setVisited,

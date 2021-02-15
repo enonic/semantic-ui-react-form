@@ -1,8 +1,8 @@
 import getIn from 'get-value';
 import {Dropdown as SemanticUiReactDropdown} from 'semantic-ui-react';
 
-import {getEnonicContext} from '../Context';
-import {setValue} from '../actions';
+import {getEnonicContext} from '../Context.jsx';
+import {setValue} from '../actions.es';
 
 
 export function Dropdown(props = {}) {

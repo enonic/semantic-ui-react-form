@@ -1,7 +1,7 @@
 import {Button, Icon} from 'semantic-ui-react';
 
-import {getEnonicContext} from '../Context';
-import {moveDown} from '../actions';
+import {getEnonicContext} from '../Context.jsx';
+import {moveDown} from '../actions.es';
 
 
 export function MoveDownButton(props) {

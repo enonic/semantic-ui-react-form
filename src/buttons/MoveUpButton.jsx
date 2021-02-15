@@ -1,7 +1,7 @@
 import {Button, Icon} from 'semantic-ui-react';
 
-import {getEnonicContext} from '../Context';
-import {moveUp} from '../actions';
+import {getEnonicContext} from '../Context.jsx';
+import {moveUp} from '../actions.es';
 
 
 export function MoveUpButton(props) {

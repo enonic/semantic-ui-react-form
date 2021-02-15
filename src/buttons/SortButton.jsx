@@ -1,7 +1,7 @@
 import {Button, Icon} from 'semantic-ui-react';
 
-import {getEnonicContext} from '../Context';
-import {sort} from '../actions';
+import {getEnonicContext} from '../Context.jsx';
+import {sort} from '../actions.es';
 
 
 export function SortButton(props) {

@@ -1,9 +1,9 @@
 import getIn from 'get-value';
 import setIn from 'set-value';
 
-import {validateForm} from './validateForm';
-import {visit as setVisited} from './visit';
-import {deReference} from '../utils/deReference';
+import {validateForm} from './validateForm.es';
+import {visit as setVisited} from './visit.es';
+import {deReference} from '../utils/deReference.es';
 
 
 export function setValue({

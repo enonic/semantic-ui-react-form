@@ -1,8 +1,8 @@
 import {Button, Icon} from 'semantic-ui-react';
 import traverse from 'traverse';
 
-import {getEnonicContext} from '../Context';
-import {reset} from '../actions';
+import {getEnonicContext} from '../Context.jsx';
+import {reset} from '../actions.es';
 
 
 export function ResetButton(props) {

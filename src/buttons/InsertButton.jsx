@@ -1,7 +1,7 @@
 import {Button, Icon} from 'semantic-ui-react';
 
-import {getEnonicContext} from '../Context';
-import {insert} from '../actions';
+import {getEnonicContext} from '../Context.jsx';
+import {insert} from '../actions.es';
 
 
 export function InsertButton(props) {

@@ -1,7 +1,7 @@
 import {Button, Icon} from 'semantic-ui-react';
 
-import {getEnonicContext} from '../Context';
-import {deleteItem} from '../actions';
+import {getEnonicContext} from '../Context.jsx';
+import {deleteItem} from '../actions.es';
 
 
 export function DeleteItemButton(props) {

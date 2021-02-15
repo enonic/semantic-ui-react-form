@@ -1,6 +1,6 @@
 import getIn from 'get-value';
 
-import {getEnonicContext} from './Context';
+import {getEnonicContext} from './Context.jsx';
 
 
 export function List(props) {

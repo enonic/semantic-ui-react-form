@@ -1,8 +1,8 @@
 import getIn from 'get-value';
 import {Checkbox as SemanticUiReactCheckbox} from 'semantic-ui-react';
 
-import {getEnonicContext} from '../Context';
-import {setValue} from '../actions';
+import {getEnonicContext} from '../Context.jsx';
+import {setValue} from '../actions.es';
 
 
 export function Checkbox(props) {

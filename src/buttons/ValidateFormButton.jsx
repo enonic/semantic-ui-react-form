@@ -1,7 +1,7 @@
 import {Button, Icon} from 'semantic-ui-react';
 
-import {getEnonicContext} from '../Context';
-import {validateForm} from '../actions';
+import {getEnonicContext} from '../Context.jsx';
+import {validateForm} from '../actions.es';
 
 
 export function ValidateFormButton(props) {

@@ -1,12 +1,12 @@
 export {
 	SET_VALUE,
 	setValue
-} from './actions/setValue';
+} from './actions/setValue.es';
 
 export {
 	SET_VISITED,
 	setVisited
-} from './actions/setVisited';
+} from './actions/setVisited.es';
 
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const INSERT = 'INSERT';
