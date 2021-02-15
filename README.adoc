@@ -7,6 +7,10 @@
 
 == Changelog
 
+=== 2.0.5
+
+* Node 14.15.5
+
 === 2.0.4
 
 * Depend on core-js
