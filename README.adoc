@@ -7,6 +7,9 @@
 
 == Changelog
 
+=== 2.1.0
+
+* Make it possible to manually disable the Submit button
 === 2.0.4
 
 * Node 14.15.5
