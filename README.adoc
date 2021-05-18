@@ -10,6 +10,12 @@
 === 2.1.0
 
 * Make it possible to manually disable the Submit button
+* Node 14.17.0
+* Webpack 5.37
+* Removed @purtuga/esm-webpack-plugin (requires webpack 4)
+* Babel 7.14.3
+* Core-js 3.12.1
+
 === 2.0.4
 
 * Node 14.15.5

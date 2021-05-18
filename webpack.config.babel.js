@@ -1,5 +1,5 @@
 import path from 'path';
-import EsmWebpackPlugin from '@purtuga/esm-webpack-plugin';
+//import EsmWebpackPlugin from '@purtuga/esm-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 
@@ -127,7 +127,7 @@ const CJS_CONFIG = {
 
 // ──────────────────────────────────────────────────────────────────────────────
 
-const ESM_CONFIG = {
+/*const ESM_CONFIG = {
   context: CONTEXT,
   entry: ENTRY,
   devtool: DEVTOOL,
@@ -166,11 +166,11 @@ const ESM_CONFIG = {
   },
   plugins: [new EsmWebpackPlugin()],
   resolve: RESOLVE
-};
+};*/
 
 // ──────────────────────────────────────────────────────────────────────────────
 
-const EXAMPLE_ESM_CONFIG = {
+/*const EXAMPLE_ESM_CONFIG = {
   context: path.resolve(__dirname, 'example'),
   entry: {
     index: './index.jsx'
@@ -222,8 +222,13 @@ const EXAMPLE_ESM_CONFIG = {
     })
   ],
   resolve: RESOLVE
-};
+};*/
 
 // ──────────────────────────────────────────────────────────────────────────────
 
-export default [UMD_CONFIG, CJS_CONFIG, ESM_CONFIG, EXAMPLE_ESM_CONFIG];
+export default [
+  UMD_CONFIG,
+  CJS_CONFIG/*,
+  ESM_CONFIG,
+  EXAMPLE_ESM_CONFIG*/
+];
