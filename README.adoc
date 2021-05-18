@@ -7,6 +7,17 @@
 
 == Changelog
 
+=== 2.2.0
+
+* Make it possible to manually disable:
+  * DeleteButton
+  * InsertButton
+  * MoveUpButton
+  * ResetButton
+  * SortButton
+  * ValidateFormButton
+  * VisitAllButton
+
 === 2.1.0
 
 * Make it possible to manually disable the Submit button

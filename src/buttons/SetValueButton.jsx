@@ -8,6 +8,7 @@ export function SetValueButton(props) {
 	//console.debug('SetValueButton props', props);
 	const {
 		children = <Icon color='green' name='add'/>,
+		//disabled = false, // Covered by ...rest
 		icon = true,
 		path,
 		value,

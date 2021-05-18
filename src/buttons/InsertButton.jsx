@@ -8,6 +8,7 @@ export function InsertButton(props) {
 	//console.debug('InsertButton props', props);
 	const {
 		children = <Icon color='green' name='add'/>,
+		disabled = false,
 		icon = true,
 		index = 0,
 		path,
@@ -18,6 +19,7 @@ export function InsertButton(props) {
 	//console.debug('InsertButton context', context);
 
 	return <Button
+		disabled={disabled}
 		icon={icon}
 		onClick={() => {
 			/*console.debug('InsertButton onClick', {

@@ -17,9 +17,11 @@ export function ResetButton(props) {
 	}, []);
  	//console.dir(leaves);
 
+	const {disabled = !leaves.length} = props;
+
 	return <Button
 		color='olive'
-		disabled={!leaves.length}
+		disabled={disabled}
 		onClick={() => dispatch(reset())}
 		type='reset'
 	><Icon name='history'/>Reset</Button>;

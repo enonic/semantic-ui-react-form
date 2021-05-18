@@ -8,6 +8,7 @@ export function MoveUpButton(props) {
 	//console.debug('MoveUpButton props', props);
 	const {
 		index = 0,
+		disabled = index === 0,
 		path
 	} = props;
 
@@ -15,7 +16,7 @@ export function MoveUpButton(props) {
 	//console.debug('MoveUpButton context', context);
 
 	return <Button
-		disabled={index===0}
+		disabled={disabled}
 		icon
 		onClick={() => dispatch(moveUp({
 			index,

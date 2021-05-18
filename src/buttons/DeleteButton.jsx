@@ -10,9 +10,11 @@ export function DeleteButton(props) {
 	const [context, dispatch] = getEnonicContext();
 	//console.debug('DeleteButton context', context);
 
-	// disabled={}
+	const {disabled = false} = props;
+
 	return <Button
 		color='red'
+		disabled={disabled}
 		onClick={() => dispatch(remove())}
 		type='button'
 	><Icon name='alternate outline trash'/>Delete</Button>;

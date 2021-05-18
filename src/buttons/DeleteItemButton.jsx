@@ -8,7 +8,7 @@ export function DeleteItemButton(props) {
 	//console.debug('DeleteItemButton props', props);
 	const {
 		children = <Icon color='red' name='alternate outline trash'/>,
-		disabled = false,
+		//disabled = false, // covered by ...rest
 		icon = true,
 		index = 0,
 		path,
@@ -20,7 +20,6 @@ export function DeleteItemButton(props) {
 
 	return <Button
 		{...rest}
-		disabled={disabled}
 		icon={icon}
 		onClick={() => dispatch(deleteItem({
 			index,

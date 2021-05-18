@@ -7,6 +7,7 @@ import {sort} from '../actions.es';
 export function SortButton(props) {
 	//console.debug('SortButton props', props);
 	const {
+		disabled = false,
 		children = <Icon color='blue' name='sort alphabet down'/>,
 		path
 	} = props;
@@ -15,6 +16,7 @@ export function SortButton(props) {
 	//console.debug('SortButton context', context);
 
 	return <Button
+		disabled={disabled}
 		icon
 		onClick={() => dispatch(sort({
 			path
