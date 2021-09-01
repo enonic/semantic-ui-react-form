@@ -7,6 +7,15 @@
 
 == Changelog
 
+=== 2.2.1
+
+* Build system upgrades
+  * Node 14.17.0 -> 14.17.5
+  * Babel 7.14.3 -> 7.15.3
+  * Core-js 3.12.1 -> 3.16.4
+  * React 16.13.1 -> 17.0.2
+  * Webpack 5.37.0 -> 5.51.1
+
 === 2.2.0
 
 * Make it possible to manually disable:
@@ -21,11 +30,12 @@
 === 2.1.0
 
 * Make it possible to manually disable the Submit button
-* Node 14.17.0
-* Webpack 5.37
-* Removed @purtuga/esm-webpack-plugin (requires webpack 4)
-* Babel 7.14.3
-* Core-js 3.12.1
+* Build system upgrades
+  * Node 14.17.0
+  * Webpack 5.37
+  * Removed @purtuga/esm-webpack-plugin (requires webpack 4)
+  * Babel 7.14.3
+  * Core-js 3.12.1
 
 === 2.0.4
 
