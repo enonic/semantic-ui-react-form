@@ -12,27 +12,31 @@ export function InsertButton(props) {
 		icon = true,
 		index = 0,
 		path,
+		//preClick = () => {},
 		value
 	} = props;
 
 	const [context, dispatch] = getEnonicContext();
 	//console.debug('InsertButton context', context);
 
+	function onClick() {
+		//preClick();
+		/*console.debug('InsertButton onClick', {
+			index,
+			path,
+			value
+		});*/
+		dispatch(insert({
+			index,
+			path,
+			value
+		}));
+	}
+
 	return <Button
 		disabled={disabled}
 		icon={icon}
-		onClick={() => {
-			/*console.debug('InsertButton onClick', {
-				index,
-				path,
-				value
-			});*/
-			dispatch(insert({
-				index,
-				path,
-				value
-			}));
-		}}
+		onClick={onClick}
 		type='button'
 	>{children}</Button>;
 } // InsertButton

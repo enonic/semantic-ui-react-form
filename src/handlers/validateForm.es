@@ -3,6 +3,7 @@ import setIn from 'set-value';
 import traverse from 'traverse';
 
 import { isFunction } from '../utils/isFunction.es';
+import { isObject } from '../utils/isObject.es';
 import { deReference } from '../utils/deReference.es';
 
 
@@ -21,10 +22,23 @@ export function validateForm({
   traverse(state.schema).forEach(function(x) {
     // fat-arrow destroys this
     if (this.notRoot && this.isLeaf && isFunction(x)) {
-      const { path } = this; // console.debug('path', path);
+      let { path } = this; //console.debug('path', path);
       const value = getIn(state.values, path); // console.debug('value', value);
       // const prevError = getIn(state.errors, path); console.debug('prevError', prevError);
-      const newError = x(value); // console.debug('newError', newError);
+
+      const rv = x(value);
+      //console.debug('rv', rv);
+
+      let newError;
+      if (isObject(rv)) {
+        newError = rv.error;
+        path = rv.path;
+      } else {
+        newError = rv;
+      }
+      //console.debug('newError', newError);
+      //console.debug('path', path);
+
       newError && setIn(errors, path, newError);
       visitAllFields && setIn(deref.visits, path, true);
       // console.debug('node', this.node);

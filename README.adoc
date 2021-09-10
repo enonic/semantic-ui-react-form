@@ -7,6 +7,15 @@
 
 == Changelog
 
+=== 2.3.0
+
+* Support nested validation by accepting {error: '', path: ''} returned from schema validator functions
+* Build system upgrades
+  * Node 14.17.5 -> 14.17.6
+  * Babel 7.15.3 -> 7.15.6
+  * Core-js 3.16.4 -> 3.17.3
+  * Webpack 5.51.1 -> 5.52.1
+
 === 2.2.1
 
 * Build system upgrades

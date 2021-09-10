@@ -12,6 +12,8 @@ export function SortButton(props) {
 		path
 	} = props;
 
+	// TODO Make it possible to pass compare function
+
 	const [context, dispatch] = getEnonicContext();
 	//console.debug('SortButton context', context);
 
