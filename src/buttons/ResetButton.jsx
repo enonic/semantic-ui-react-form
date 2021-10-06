@@ -17,12 +17,34 @@ export function ResetButton(props) {
 	}, []);
  	//console.dir(leaves);
 
-	const {disabled = !leaves.length} = props;
+	const {
+		children=<><Icon name='history'/>Reset</>,
+		color = ({
+			defaultColor,
+			disabled,
+			primary,
+			secondary
+		}) => (disabled || secondary || primary)
+			? null
+			: defaultColor,
+		disabled = !leaves.length,
+		primary = false,
+		secondary = false,
+		...rest
+	} = props;
 
 	return <Button
-		color='olive'
+		{...rest}
+		color={color({
+			defaultColor: 'olive',
+			disabled,
+			primary,
+			secondary
+		})}
 		disabled={disabled}
 		onClick={() => dispatch(reset())}
+		primary={primary}
+		secondary={secondary}
 		type='reset'
-	><Icon name='history'/>Reset</Button>;
+	>{children}</Button>;
 } // ResetButton

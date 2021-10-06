@@ -7,6 +7,16 @@
 
 == Changelog
 
+=== 2.4.0
+
+* Make Reset and Submit Button customizable
+* semantic-ui-react 2.0.3 -> 2.0.4
+* Build system upgrades
+  * Node 14.17.6 -> 14.18.0
+  * Babel 7.15.6 -> 7.15.7
+  * Core-js 3.17.3 -> 3.18.2
+  * Webpack 5.52.1 -> 5.57.1
+
 === 2.3.0
 
 * Support nested validation by accepting {error: '', path: ''} returned from schema validator functions

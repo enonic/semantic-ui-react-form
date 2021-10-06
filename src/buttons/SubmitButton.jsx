@@ -25,13 +25,25 @@ export function SubmitButton(props) {
  	// console.dir(errorsArr);
 
 	const {
-		disabled = !!errorsArr.length/* || !changesArr.length*/
+		children = <>
+			<Icon name='save'/>{errorsArr.length ? `${errorsArr.length} validation error${errorsArr.length > 1 ? 's' : ''}`: 'Submit'}
+		</>,
+		color = ({disabled, primary}) => disabled
+			? 'red'
+			: primary
+				? null
+				: 'green',
+		disabled = !!errorsArr.length,/* || !changesArr.length*/
+		primary = false,
+		...rest
 	} = props;
 
 	return <Button
-		color={errorsArr.length ? 'red' : 'green'}
+		{...rest}
+		color={color({disabled, primary})}
 		disabled={disabled}
 		onClick={() => dispatch(submit())}
+		primary={primary}
 		type='submit'
-	><Icon name='save'/>{errorsArr.length ? `${errorsArr.length} validation error${errorsArr.length > 1 ? 's' : ''}`: 'Submit'}</Button>;
+	>{children}</Button>;
 } // SubmitButton
