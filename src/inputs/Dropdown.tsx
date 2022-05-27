@@ -1,29 +1,44 @@
+import type {StrictDropdownProps} from 'semantic-ui-react';
+
+
 import {getIn} from '@enonic/js-utils';
 import {Dropdown as SemanticUiReactDropdown} from 'semantic-ui-react';
 import {getEnonicContext} from '../Context';
 import {setValue} from '../actions';
 
 
-type DropdownValueType = boolean | number | string | (boolean | number | string)[];
-
-
-export function Dropdown<Value extends DropdownValueType>(props :{
-	// Required
-	name :string
+type CommonProps<Value extends StrictDropdownProps['value']> = Omit<
+	StrictDropdownProps,'onChange'|'value'
+> & {
 	// Optional
 	parentPath ?:string
-	path ?:string
 	value ?:Value
-}) {
+}
+
+// name or path is required
+type DropdownProps<Value extends StrictDropdownProps['value']> =
+	| CommonProps<Value> & {
+		name :string
+		path ?:string
+	}
+	| CommonProps<Value> & {
+		name ?:string
+		path :string
+	}
+
+
+export function Dropdown<
+	Value extends StrictDropdownProps['value']
+>(props :DropdownProps<Value>) {
 	//console.debug('Dropdown props', props);
 
 	const [context, dispatch] = getEnonicContext();
 	//console.debug('Dropdown context', context);
 
 	const {
-		name,
+		name, // name or path is required
 		parentPath,
-		path = parentPath ? `${parentPath}.${name}` : name,
+		path = parentPath ? `${parentPath}.${name}` : name, // name or path is required
 		value = getIn(context.values, path),
 		...rest
 	} = props;

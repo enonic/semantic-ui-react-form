@@ -1,3 +1,6 @@
+import type {StrictInputProps} from 'semantic-ui-react';
+
+
 import {getIn} from '@enonic/js-utils';
 import {
 	Icon,
@@ -12,33 +15,48 @@ import {
 } from '../actions';
 
 
-export function Input<Value>(props :{
-	// Required
-	name :string
-	// Optional
+type LimitedStrictInputProps = Omit<
+	StrictInputProps,'error'|'onBlur'|'onChange'
+>
+
+type OptionalProps<Value> = {
 	parentPath ?:string
-	path ?:string
+	placeholder ?:string
 	validateOnBlur ?:boolean
 	validateOnChange ?:boolean
 	visitOnChange ?:boolean
 	value ?:Value
-}) {
+}
+
+type CommonProps<Value> = LimitedStrictInputProps & OptionalProps<Value>;
+
+// You have to provide either name or path
+type InputProps<Value> =
+	| CommonProps<Value> & {
+		name :string
+		path ?:string
+	}
+	| CommonProps<Value> & {
+		name ?:string
+		path :string
+	}
+
+
+export function Input<Value>(props :InputProps<Value>) {
 	// console.debug('Input props', props);
 
 	const [context, dispatch] = getEnonicContext();
 	// console.debug('Input context', context);
 
 	const {
-		// Required
-		name,
-		// Optional
+		name, // name or path is required
 		parentPath,
-		path = parentPath ? `${parentPath}.${name}` : name,
+		path = parentPath ? `${parentPath}.${name}` : name, // name or path is required
 		validateOnBlur = true,
 		validateOnChange = true,
 		visitOnChange = true,
 		value = getIn(context.values, path, ''),
-		...rest
+		...rest // handles children, fluid, placeholder and more <StrictInputProps>
 	} = props;
 	// console.debug('Input context', context);
 

@@ -6,18 +6,16 @@ import {getEnonicContext} from '../Context';
 import {reset} from '../actions';
 
 
-export function ResetButton(props :{
+export function ResetButton(props :Omit<
+	StrictButtonProps,'color'|'onClick'|'type'
+> & {
 	// Optional
-	children ?:React.ReactNode
 	color ?:(params :{
 		defaultColor :StrictButtonProps['color']
 		disabled :boolean
 		primary :boolean
 		secondary :boolean
 	}) => StrictButtonProps['color']|null
-	disabled :boolean
-	primary :boolean
-	secondary :boolean
 }) {
 	//console.debug('ResetButton props', props);
 
