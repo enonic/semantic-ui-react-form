@@ -1,26 +1,37 @@
-import getIn from 'get-value';
+import {getIn} from '@enonic/js-utils';
 import {
 	Icon,
 	Input as SemanticUiReactInput,
 	Message
 } from 'semantic-ui-react';
-
-import {getEnonicContext} from '../Context.jsx';
+import {getEnonicContext} from '../Context';
 import {
 	setValue,
-	setVisited,
-	validateForm
+	setVisited//,
+	//validateForm
 } from '../actions';
 
 
-export function Input(props = {}) {
+export function Input<Value>(props :{
+	// Required
+	name :string
+	// Optional
+	parentPath ?:string
+	path ?:string
+	validateOnBlur ?:boolean
+	validateOnChange ?:boolean
+	visitOnChange ?:boolean
+	value ?:Value
+}) {
 	// console.debug('Input props', props);
 
 	const [context, dispatch] = getEnonicContext();
 	// console.debug('Input context', context);
 
 	const {
+		// Required
 		name,
+		// Optional
 		parentPath,
 		path = parentPath ? `${parentPath}.${name}` : name,
 		validateOnBlur = true,
@@ -47,7 +58,7 @@ export function Input(props = {}) {
 			onBlur={() => {
 				dispatch(setVisited({path, validate: validateOnBlur}));
 			}}
-			onChange={(event, {value: newValue}) => {
+			onChange={(_event, {value: newValue}) => {
 				dispatch(setValue({
 					path,
 					validate: validateOnChange,

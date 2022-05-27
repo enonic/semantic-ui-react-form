@@ -1,11 +1,19 @@
-import getIn from 'get-value';
+import {getIn} from '@enonic/js-utils';
 import {Checkbox as SemanticUiReactCheckbox} from 'semantic-ui-react';
+import {getEnonicContext} from '../Context';
+import {setValue} from '../actions';
 
-import {getEnonicContext} from '../Context.jsx';
-import {setValue} from '../actions.es';
 
-
-export function Checkbox(props) {
+export function Checkbox<Value>(props :{
+	// Required
+	name :string
+	// Optional
+	checked ?:boolean
+	defaultChecked ?:boolean
+	parentPath ?:string
+	path ?:string
+	value ?:Value
+}) {
 	const [context, dispatch] = getEnonicContext();
 
 	const {
@@ -30,7 +38,7 @@ export function Checkbox(props) {
 	return <SemanticUiReactCheckbox
 		{...rest}
 		checked={checked}
-		onChange={(ignored,{checked}) => {
+		onChange={(_event,{checked}) => {
 			//console.debug('Checkbox onChange checked', checked);
 			dispatch(setValue({path, value: checked}));
 		}}

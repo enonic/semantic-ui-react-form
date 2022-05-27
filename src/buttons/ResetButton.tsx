@@ -1,11 +1,24 @@
+import type {StrictButtonProps} from 'semantic-ui-react';
 import {Button, Icon} from 'semantic-ui-react';
 import traverse from 'traverse';
 
-import {getEnonicContext} from '../Context.jsx';
-import {reset} from '../actions.es';
+import {getEnonicContext} from '../Context';
+import {reset} from '../actions';
 
 
-export function ResetButton(props) {
+export function ResetButton(props :{
+	// Optional
+	children ?:React.ReactNode
+	color ?:(params :{
+		defaultColor :StrictButtonProps['color']
+		disabled :boolean
+		primary :boolean
+		secondary :boolean
+	}) => StrictButtonProps['color']|null
+	disabled :boolean
+	primary :boolean
+	secondary :boolean
+}) {
 	//console.debug('ResetButton props', props);
 
 	const [context, dispatch] = getEnonicContext();

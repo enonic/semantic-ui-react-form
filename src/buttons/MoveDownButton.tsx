@@ -1,10 +1,16 @@
 import {Button, Icon} from 'semantic-ui-react';
 
-import {getEnonicContext} from '../Context.jsx';
-import {moveDown} from '../actions.es';
+import {getEnonicContext} from '../Context';
+import {moveDown} from '../actions';
 
 
-export function MoveDownButton(props) {
+export function MoveDownButton(props :{
+	// Required
+	path :string
+	// Optional
+	disabled ?:boolean
+	index ?:number
+}) {
 	//console.debug('MoveDownButton props', props);
 	const {
 		disabled = false,
@@ -12,7 +18,7 @@ export function MoveDownButton(props) {
 		path
 	} = props;
 
-	const [context, dispatch] = getEnonicContext();
+	const [_context, dispatch] = getEnonicContext();
 	//console.debug('MoveDownButton context', context);
 
 	return <Button

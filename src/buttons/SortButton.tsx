@@ -1,20 +1,25 @@
 import {Button, Icon} from 'semantic-ui-react';
+import {getEnonicContext} from '../Context';
+import {sort} from '../actions';
 
-import {getEnonicContext} from '../Context.jsx';
-import {sort} from '../actions.es';
 
-
-export function SortButton(props) {
+export function SortButton(props :{
+	// Required
+	path :string
+	// Optional
+	children ?:React.ReactNode
+	disabled ?:boolean
+}) {
 	//console.debug('SortButton props', props);
 	const {
-		disabled = false,
+		path,
 		children = <Icon color='blue' name='sort alphabet down'/>,
-		path
+		disabled = false
 	} = props;
 
 	// TODO Make it possible to pass compare function
 
-	const [context, dispatch] = getEnonicContext();
+	const [_context, dispatch] = getEnonicContext();
 	//console.debug('SortButton context', context);
 
 	return <Button

@@ -1,10 +1,16 @@
 import {Button, Icon} from 'semantic-ui-react';
 
-import {getEnonicContext} from '../Context.jsx';
-import {moveUp} from '../actions.es';
+import {getEnonicContext} from '../Context';
+import {moveUp} from '../actions';
 
 
-export function MoveUpButton(props) {
+export function MoveUpButton(props :{
+	// Required
+	path :string
+	// Optional
+	disabled ?:boolean
+	index ?:number
+}) {
 	//console.debug('MoveUpButton props', props);
 	const {
 		index = 0,
@@ -12,7 +18,7 @@ export function MoveUpButton(props) {
 		path
 	} = props;
 
-	const [context, dispatch] = getEnonicContext();
+	const [_context, dispatch] = getEnonicContext();
 	//console.debug('MoveUpButton context', context);
 
 	return <Button

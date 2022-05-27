@@ -1,25 +1,44 @@
-import getIn from 'get-value';
-import setIn from 'set-value';
+import type {
+  AnyObject,
+  SemanticUiReactForm
+} from '../index.d';
+
+
+import {
+  getIn,
+  isFunction,
+  isObject,
+  setIn
+} from '@enonic/js-utils';
 import traverse from 'traverse';
-
-import { isFunction } from '../utils/isFunction.es';
-import { isObject } from '../utils/isObject.es';
-import { deReference } from '../utils/deReference.es';
+import { deReference } from '../utils/deReference';
 
 
-export function validateForm({
+export function validateForm<
+  Values extends AnyObject // Required, but limited
+>({
   // action,
-  afterValidate = () => {
+  afterValidate = (
+    // Prefixing with underscore to avoid "is declared but its value is never read"
+    _currentState :SemanticUiReactForm.State<Values>
+  ) => {
     /* no-op */
   },
-  state = {},
+  state,
   visitAllFields = false
+} :{
+  state :SemanticUiReactForm.State<Values>
+  afterValidate ?:SemanticUiReactForm.AfterValidateFunction<SemanticUiReactForm.State<Values>>
+  visitAllFields ?:boolean
 }) {
   // console.debug('validateForm visitAllFields', visitAllFields, 'state', state);
   // const {visitAllFields = false} = action;
   const deref = deReference(state);
   const errors = {}; // forgetting old errors here
-  traverse(state.schema).forEach(function(x) {
+  traverse(state.schema).forEach(function(x :(value :unknown) => string|{
+    error :string
+    path :Array<string>
+  }) {
     // fat-arrow destroys this
     if (this.notRoot && this.isLeaf && isFunction(x)) {
       let { path } = this; //console.debug('path', path);
@@ -29,7 +48,7 @@ export function validateForm({
       const rv = x(value);
       //console.debug('rv', rv);
 
-      let newError;
+      let newError :string;
       if (isObject(rv)) {
         newError = rv.error;
         path = rv.path;

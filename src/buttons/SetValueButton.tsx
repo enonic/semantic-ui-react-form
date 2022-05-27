@@ -1,10 +1,17 @@
 import {Button, Icon} from 'semantic-ui-react';
 
-import {getEnonicContext} from '../Context.jsx';
-import {setValue} from '../actions.es';
+import {getEnonicContext} from '../Context';
+import {setValue} from '../actions';
 
 
-export function SetValueButton(props) {
+export function SetValueButton<Value>(props :{
+	// Required
+	path :string
+	value :Value
+	// Optional
+	children ?:React.ReactNode
+	icon ?:boolean
+}) {
 	//console.debug('SetValueButton props', props);
 	const {
 		children = <Icon color='green' name='add'/>,
@@ -16,7 +23,7 @@ export function SetValueButton(props) {
 	} = props;
 	//console.debug('SetValueButton path', path, 'value', value);
 
-	const [context, dispatch] = getEnonicContext();
+	const [_context, dispatch] = getEnonicContext();
 	//console.debug('SetValueButton context', context);
 
 	return <Button

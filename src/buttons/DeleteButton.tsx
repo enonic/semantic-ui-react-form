@@ -1,13 +1,15 @@
 import {Button, Icon} from 'semantic-ui-react';
 
-import {getEnonicContext} from '../Context.jsx';
-import {remove} from '../actions.es';
+import {getEnonicContext} from '../Context';
+import {remove} from '../actions';
 
 
-export function DeleteButton(props) {
+export function DeleteButton(props :{
+	disabled ?:boolean
+} = {}) {
 	//console.debug('DeleteButton props', props);
 
-	const [context, dispatch] = getEnonicContext();
+	const [_context, dispatch] = getEnonicContext();
 	//console.debug('DeleteButton context', context);
 
 	const {disabled = false} = props;
@@ -17,5 +19,5 @@ export function DeleteButton(props) {
 		disabled={disabled}
 		onClick={() => dispatch(remove())}
 		type='button'
-	><Icon name='alternate outline trash'/>Delete</Button>;
+	><Icon name='trash alternate outline'/>Delete</Button>;
 } // DeleteButton

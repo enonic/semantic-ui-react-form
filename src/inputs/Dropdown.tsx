@@ -1,11 +1,20 @@
-import getIn from 'get-value';
+import {getIn} from '@enonic/js-utils';
 import {Dropdown as SemanticUiReactDropdown} from 'semantic-ui-react';
+import {getEnonicContext} from '../Context';
+import {setValue} from '../actions';
 
-import {getEnonicContext} from '../Context.jsx';
-import {setValue} from '../actions.es';
+
+type DropdownValueType = boolean | number | string | (boolean | number | string)[];
 
 
-export function Dropdown(props = {}) {
+export function Dropdown<Value extends DropdownValueType>(props :{
+	// Required
+	name :string
+	// Optional
+	parentPath ?:string
+	path ?:string
+	value ?:Value
+}) {
 	//console.debug('Dropdown props', props);
 
 	const [context, dispatch] = getEnonicContext();
@@ -28,9 +37,12 @@ export function Dropdown(props = {}) {
 
 	return <SemanticUiReactDropdown
 		{...rest}
-		onChange={(ignoredEvent,{value: newValue}) => {
+		onChange={(_event,{value: newValue}) => {
 			//console.debug('Dropdown newValue', newValue);
-			dispatch(setValue({path, value: newValue}));
+			dispatch(setValue<Value>({
+				path,
+				value: newValue as Value
+			}));
 		}}
 		value={value}
 	/>;

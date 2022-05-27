@@ -1,7 +1,16 @@
 /* eslint-disable no-console */
+import type {
+  AnyObject,
+  SemanticUiReactForm
+} from './index.d';
+
+
 import deepEqual from 'fast-deep-equal';
-import getIn from 'get-value';
-import setIn from 'set-value';
+import {
+  getIn,
+  isFunction,
+  setIn
+} from '@enonic/js-utils';
 import traverse from 'traverse';
 
 import {
@@ -21,29 +30,40 @@ import {
   // VALIDATE_FIELD,
   VALIDATE_FORM,
   VISIT_ALL
-} from './actions.es';
+} from './actions';
 
-import { validateForm } from './handlers/validateForm.es';
-import { visit } from './handlers/visit.es';
-import { setValue } from './handlers/setValue.es';
-import { isFunction } from './utils/isFunction.es';
-import { deReference } from './utils/deReference.es';
+import { validateForm } from './handlers/validateForm';
+import { visit } from './handlers/visit';
+import { setValue } from './handlers/setValue';
+import { deReference } from './utils/deReference';
 
 
-export function reducerGenerator({
+export function reducerGenerator<
+  Values extends AnyObject // Required, but limited
+>({
   afterValidate,
   afterVisit,
   initialState,
   onChange,
   onDelete,
   onSubmit
+} :{
+  initialState :SemanticUiReactForm.State<Values>,
+  afterValidate ?:SemanticUiReactForm.AfterValidateFunction<SemanticUiReactForm.State<Values>>,
+  afterVisit ?:SemanticUiReactForm.AfterVisitFunction<SemanticUiReactForm.State<Values>>,
+  onChange ?:SemanticUiReactForm.OnChangeFunction<Values>,
+  onDelete ?:SemanticUiReactForm.OnDeleteFunction<Values>,
+  onSubmit ?:SemanticUiReactForm.OnSubmitFunction<Values>,
 }) {
-  function reducer(state, action) {
+  function reducer(
+    state :SemanticUiReactForm.State<Values>,
+    action :SemanticUiReactForm.Action
+  ) :SemanticUiReactForm.State<Values> {
     // console.debug('reducer action', action, 'state', state);
     switch (action.type) {
       case DELETE_ITEM: {
         // console.debug('reducer state', state, 'action', action);
-        const deref = deReference(state);
+        const deref = deReference<typeof state>(state);
         const array = getIn(deref.values, action.path);
         // console.debug('reducer state', state, 'action', action, 'array', array);
         if (!Array.isArray(array)) {
@@ -58,7 +78,7 @@ export function reducerGenerator({
       }
       case INSERT: {
         // console.debug('reducer state', state, 'action', action);
-        const deref = deReference(state);
+        const deref = deReference<typeof state>(state);
         const array = getIn(deref.values, action.path);
         // console.debug('reducer state', state, 'action', action, 'array', array);
         if (!Array.isArray(array)) {
@@ -73,7 +93,7 @@ export function reducerGenerator({
         return deref;
       }
       case MOVE_DOWN: {
-        const deref = deReference(state);
+        const deref = deReference<typeof state>(state);
         const array = getIn(deref.values, action.path);
         if (!Array.isArray(array)) {
           console.error(`path: ${action.path}, not an array!`);
@@ -93,7 +113,7 @@ export function reducerGenerator({
         return deref;
       }
       case MOVE_UP: {
-        const deref = deReference(state);
+        const deref = deReference<typeof state>(state);
         const array = getIn(deref.values, action.path);
         if (!Array.isArray(array)) {
           console.error(`path: ${action.path}, not an array!`);
@@ -113,7 +133,7 @@ export function reducerGenerator({
         return deref;
       }
       /* case PUSH: {
-        const deref = deReference(state);
+        const deref = deReference<typeof state>(state);
         const array = getIn(deref.values, action.path);
         if (!Array.isArray(array)) {
           return state;
@@ -137,7 +157,7 @@ export function reducerGenerator({
           // console.debug('reducer action', action, 'did not change state', state);
           return state;
         }
-        const deref = deReference(state);
+        const deref = deReference<typeof state>(state);
         setIn(deref.errors, action.path, action.error);
         // console.debug('reducer action', action, 'state', state, 'deref', deref);
         return deref;
@@ -145,23 +165,30 @@ export function reducerGenerator({
       case SET_SCHEMA: {
         // console.debug('reducer action', action);
         const { path, schema } = action;
-        const deref = deReference(state);
+        const deref = deReference<typeof state>(state);
         setIn(deref.schema, path, schema);
         // console.debug('reducer action', action, 'state', state, 'deref', deref);
         return deref;
       }
       case SET_STATE: {
         // console.debug('reducer action', action);
-        return action.value;
+        return action.value as SemanticUiReactForm.State<Values>;
       }
       case SET_VALUE: {
-        return setValue({action, afterValidate, afterVisit, initialState, onChange, state});
+        return setValue({
+          action,
+          afterValidate,
+          afterVisit,
+          initialState,
+          //onChange, // Why was this ever here? Copy paste mistake?
+          state
+        });
       }
       case SET_VISITED: {
         return visit({action, afterValidate, afterVisit, state});
       }
       case SORT: {
-        const deref = deReference(state);
+        const deref = deReference<typeof state>(state);
         const array = getIn(deref.values, action.path);
         if (!Array.isArray(array)) {
           console.error(`path: ${action.path}, not an array!`);
@@ -190,7 +217,7 @@ export function reducerGenerator({
           // console.debug('reducer action', action, 'did not change state', state);
           return state;
         }
-        const deref = deReference(state);
+        const deref = deReference<typeof state>(state);
         setIn(deref.errors, action.path, error);
         // console.debug('reducer action', action, 'deref', deref);
         afterValidate(deref);
@@ -206,7 +233,7 @@ export function reducerGenerator({
         });
       }
       case VISIT_ALL: {
-        const deref = deReference(state);
+        const deref = deReference<typeof state>(state);
         traverse(state.schema).forEach(function(x) {
           // fat-arrow destroys this
           if (this.notRoot && this.isLeaf && isFunction(x)) {

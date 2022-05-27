@@ -1,13 +1,15 @@
 import {Button, Icon} from 'semantic-ui-react';
 
-import {getEnonicContext} from '../Context.jsx';
-import {validateForm} from '../actions.es';
+import {getEnonicContext} from '../Context';
+import {validateForm} from '../actions';
 
 
-export function ValidateFormButton(props) {
+export function ValidateFormButton(props :{
+	disabled ?:boolean
+} = {}) {
 	//console.debug('ValidateFormButton props', props);
 
-	const [context, dispatch] = getEnonicContext();
+	const [_context, dispatch] = getEnonicContext();
 	//console.debug('ValidateFormButton context', context);
 
 	const {disabled = false} = props;

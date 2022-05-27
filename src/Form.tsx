@@ -58,22 +58,47 @@ Let's consider option 1:
 . Any user activity in child form, needs to update root form...
 */
 
+import type {
+  AnyObject,
+  SemanticUiReactForm
+} from './index.d';
+
+
 // import {Form as SemanticUiReactForm} from 'semantic-ui-react';
-import { EnonicProvider } from './Context';
+import {isFunction} from '@enonic/js-utils';
+import * as React from 'react';
+import { EnonicProviderComponent } from './Context';
 import { reducerGenerator } from './reducerGenerator';
 import { validateForm } from './handlers/validateForm';
-import { isFunction } from './utils/isFunction';
 import { deReference } from './utils/deReference';
 
 
-export function Form(props) {
+export function Form<
+  Values extends AnyObject // Required, but limited
+>(props :{
+  initialValues :Values|(() => Values),
+  afterValidate ?:SemanticUiReactForm.AfterValidateFunction<SemanticUiReactForm.State<Values>>,
+  afterVisit ?:SemanticUiReactForm.AfterVisitFunction<SemanticUiReactForm.State<Values>>,
+  children ?:React.ReactNode,
+  onChange ?:SemanticUiReactForm.OnChangeFunction<Values>,
+  onDelete ?:SemanticUiReactForm.OnDeleteFunction<Values>,
+  onSubmit ?:SemanticUiReactForm.OnSubmitFunction<Values>,
+  validateOnInit ?:boolean,
+  schema ?:SemanticUiReactForm.Schema
+}) {
   // console.debug('Form props', props);
 
   const {
-    afterValidate = () => {
+    afterValidate = (
+      // Prefixing with underscore to avoid "is declared but its value is never read"
+      _currentState :SemanticUiReactForm.State<Values>
+    ) => {
       /* no-op */
     },
-    afterVisit = () => {
+    afterVisit = (
+      // Prefixing with underscore to avoid "is declared but its value is never read"
+      _currentState :SemanticUiReactForm.State<Values>
+    ) => {
       /* no-op */
     },
     children,
@@ -94,9 +119,9 @@ export function Form(props) {
   // console.debug('Form initialSchema', initialSchema);
 
   const initialValues = deReference(
-    isFunction(props.initialValues)
+    (isFunction(props.initialValues)
       ? props.initialValues()
-      : props.initialValues
+      : props.initialValues) as Values
   );
 
   /* function validate({ schema, values }) {
@@ -114,7 +139,7 @@ export function Form(props) {
     return errors;
   } // validate */
 
-  let initialState = {
+  let initialState :SemanticUiReactForm.State<Values> = {
     changes: {},
     errors: {},
     schema: initialSchema,
@@ -135,7 +160,7 @@ export function Form(props) {
     }
   }
 
-  const reducer = reducerGenerator({
+  const reducer = reducerGenerator<Values>({
     afterValidate,
     afterVisit,
     initialState,
@@ -145,8 +170,11 @@ export function Form(props) {
   });
 
   return (
-    <EnonicProvider initialState={initialState} reducer={reducer}>
+    <EnonicProviderComponent<Values>
+      initialState={initialState}
+      reducer={reducer}
+    >
       {children}
-    </EnonicProvider>
+    </EnonicProviderComponent>
   );
 } // Form

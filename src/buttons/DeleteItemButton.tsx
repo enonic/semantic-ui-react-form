@@ -1,13 +1,20 @@
 import {Button, Icon} from 'semantic-ui-react';
 
-import {getEnonicContext} from '../Context.jsx';
-import {deleteItem} from '../actions.es';
+import {getEnonicContext} from '../Context';
+import {deleteItem} from '../actions';
 
 
-export function DeleteItemButton(props) {
+export function DeleteItemButton(props :{
+	// Required
+	path :string
+	// Optional
+	children ?:React.ReactNode
+	icon ?:boolean
+	index ?:number
+}) {
 	//console.debug('DeleteItemButton props', props);
 	const {
-		children = <Icon color='red' name='alternate outline trash'/>,
+		children = <Icon color='red' name='trash alternate outline'/>,
 		//disabled = false, // covered by ...rest
 		icon = true,
 		index = 0,
@@ -15,7 +22,7 @@ export function DeleteItemButton(props) {
 		...rest
 	} = props;
 
-	const [context, dispatch] = getEnonicContext();
+	const [_context, dispatch] = getEnonicContext();
 	//console.debug('DeleteItemButton context', context);
 
 	return <Button

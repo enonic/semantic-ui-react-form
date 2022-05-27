@@ -1,22 +1,32 @@
 import {Button, Icon} from 'semantic-ui-react';
+import {getEnonicContext} from '../Context';
+import {insert} from '../actions';
 
-import {getEnonicContext} from '../Context.jsx';
-import {insert} from '../actions.es';
 
-
-export function InsertButton(props) {
+export function InsertButton<Value>(props :{
+	// Required
+	path :string
+	value :Value
+	// Optional
+	children ?:React.ReactNode
+	disabled ?:boolean
+	icon ?:boolean
+	index ?:number
+}) {
 	//console.debug('InsertButton props', props);
 	const {
+		// Required
+		path,
+		// Optional
 		children = <Icon color='green' name='add'/>,
 		disabled = false,
 		icon = true,
 		index = 0,
-		path,
 		//preClick = () => {},
 		value
 	} = props;
 
-	const [context, dispatch] = getEnonicContext();
+	const [_context, dispatch] = getEnonicContext();
 	//console.debug('InsertButton context', context);
 
 	function onClick() {

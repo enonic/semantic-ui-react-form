@@ -7,12 +7,18 @@ import TerserPlugin from 'terser-webpack-plugin';
 
 const CONTEXT = path.resolve(__dirname, 'src');
 const ENTRY = {
-  index: './index.mjs'
+  index: './index.ts'
 };
 const DEVTOOL = false;
+const EXTERNALS = {
+  react: 'React',
+  'react-dom': 'ReactDOM'
+  //'semantic-ui-react'
+};
 const MODE = 'production';
-const TEST = /\.(es6?|m?jsx?)$/;
+const TEST = /\.(tsx?|js)$/; // tsx, ts, js
 const BABEL_PRESETS = [
+  '@babel/preset-typescript',
   [
     '@babel/preset-env',
     {
@@ -25,10 +31,9 @@ const OUTPUT_PATH = path.join(__dirname, 'dist');
 const PERFORMANCE = { hints: false };
 const RESOLVE = {
   extensions: [
-    '.js', // Or node_modules will fail to resolve
-    '.jsx',
-    '.mjs',
-    '.es'
+    '.ts',
+    '.tsx',
+    '.js' // Or node_modules will fail to resolve
   ]
 };
 
@@ -37,6 +42,7 @@ const RESOLVE = {
 const UMD_CONFIG = {
   context: CONTEXT,
   entry: ENTRY,
+  externals: EXTERNALS,
   devtool: DEVTOOL,
   mode: MODE,
   module: {
@@ -83,10 +89,7 @@ const CJS_CONFIG = {
   context: CONTEXT,
   devtool: DEVTOOL,
   entry: ENTRY,
-  /* externals: [
-    'formik',
-    'semantic-ui-react'
-  ],*/
+  externals: EXTERNALS,
   mode: MODE,
   module: {
     rules: [

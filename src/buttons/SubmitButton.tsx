@@ -1,11 +1,21 @@
+import type {StrictButtonProps} from 'semantic-ui-react';
+
+
 import {Button, Icon} from 'semantic-ui-react';
 import traverse from 'traverse';
+import {getEnonicContext} from '../Context';
+import {submit} from '../actions';
 
-import {getEnonicContext} from '../Context.jsx';
-import {submit} from '../actions.es';
 
-
-export function SubmitButton(props) {
+export function SubmitButton(props :{
+	children ?:React.ReactNode
+	color ?:(params :{
+		disabled :boolean
+		primary :boolean
+	}) => StrictButtonProps['color']|null
+	disabled ?:boolean
+	primary ?:boolean
+}) {
 	// console.debug('SubmitButton props', props);
 
 	const [context, dispatch] = getEnonicContext();

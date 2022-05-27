@@ -1,16 +1,19 @@
 import {Button, Icon} from 'semantic-ui-react';
 
-import {getEnonicContext} from '../Context.jsx';
-import {visitAll} from '../actions.es';
+import {getEnonicContext} from '../Context';
+import {visitAll} from '../actions';
 
 
-export function VisitAllButton(props) {
+export function VisitAllButton(props :{
+  children ?:React.ReactNode
+  disabled ?:boolean
+} = {}) {
   const {
     children = <><Icon name='lightning'/>Visit all</>,
     disabled = false
   } = props;
 
-  const [context, dispatch] = getEnonicContext();
+  const [_context, dispatch] = getEnonicContext();
 
   return <Button
 		color='olive'

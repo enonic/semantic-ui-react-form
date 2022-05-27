@@ -1,17 +1,32 @@
-import getIn from 'get-value';
-import setIn from 'set-value';
-
-import {validateForm} from './validateForm.es';
-import {visit as setVisited} from './visit.es';
-import {deReference} from '../utils/deReference.es';
+import type {
+  AnyObject,
+  SemanticUiReactForm
+} from '../index.d';
 
 
-export function setValue({
+import {
+  getIn,
+  setIn
+} from '@enonic/js-utils';
+import {validateForm} from './validateForm';
+import {visit as setVisited} from './visit';
+import {deReference} from '../utils/deReference';
+
+
+export function setValue<
+  Values extends AnyObject // Required, but limited
+>({
   action,
-  afterValidate = () => {
+  afterValidate = (
+    // Prefixing with underscore to avoid "is declared but its value is never read"
+    _currentState :SemanticUiReactForm.State<Values>
+  ) => {
     /* no-op */
   },
-  afterVisit = () => {
+  afterVisit = (
+    // Prefixing with underscore to avoid "is declared but its value is never read"
+    _currentState :SemanticUiReactForm.State<Values>
+  ) => {
     /* no-op */
   },
   initialState,
@@ -19,6 +34,13 @@ export function setValue({
     /* no-op */
   },
   state
+} :{
+  action :SemanticUiReactForm.SetValueFunctionParams
+  initialState :SemanticUiReactForm.State<Values>
+  state :SemanticUiReactForm.State<Values>
+  afterValidate ?:SemanticUiReactForm.AfterValidateFunction<SemanticUiReactForm.State<Values>>
+  afterVisit ?:SemanticUiReactForm.AfterVisitFunction<SemanticUiReactForm.State<Values>>,
+  onChange ?:SemanticUiReactForm.OnChangeFunction<Values>,
 }) {
   const {
     path,

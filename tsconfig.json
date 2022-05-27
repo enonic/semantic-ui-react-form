@@ -1,0 +1,54 @@
+{
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"baseUrl": "./",
+		"declaration": true,
+		"declarationMap": false,
+		"inlineSourceMap": false,
+		"inlineSources": false,
+		"jsx": "react-jsx",
+		"lib": [
+			"dom", // console
+			"es2015",
+			"es2015.iterable"
+		],
+		"listEmittedFiles": false,
+		"listFiles": false,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"outDir": "build/tsc",
+		"paths": {
+			// Remember to add any external path to excludes too!
+			"@enonic/js-utils": ["../enonic-js-utils/src"]
+		},
+		"pretty": true,
+		"rootDir": "../",
+		"rootDirs": [
+			"src"
+		],
+
+		// Even though the setting disables type checking for d.ts files,
+		// TypeScript still type checks the code you specifically
+		// refer to in your application's source code.
+		"skipLibCheck": true, // Disable type checking for node_modules
+
+		"sourceMap": false,
+		"target": "es5",
+		"types": [
+			"lodash.clonedeep",
+			"prop-types",
+			"react",
+			"traverse"
+		]
+  },
+	"exclude": [
+		"**/*.d.ts",
+		"../enonic-js-utils/**/*", // Don't make files inside that folder!
+		"node_modules/**/*",
+		"node_modules"
+	],
+	"include": [
+		"src/**/*.tsx",
+		"src/**/*.ts"
+	]
+}
