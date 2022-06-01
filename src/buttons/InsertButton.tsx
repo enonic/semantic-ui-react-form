@@ -26,7 +26,7 @@ export function InsertButton<Value>(props :{
 		value
 	} = props;
 
-	const [_context, dispatch] = getEnonicContext();
+	const {dispatch} = getEnonicContext();
 	//console.debug('InsertButton context', context);
 
 	function onClick() {

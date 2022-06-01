@@ -46,7 +46,7 @@ type InputProps<Value> =
 export function Input<Value>(props :InputProps<Value>) {
 	// console.debug('Input props', props);
 
-	const [context, dispatch] = getEnonicContext();
+	const {dispatch, state} = getEnonicContext();
 	// console.debug('Input context', context);
 
 	const {
@@ -56,15 +56,15 @@ export function Input<Value>(props :InputProps<Value>) {
 		validateOnBlur = true,
 		validateOnChange = true,
 		visitOnChange = true,
-		value = getIn(context.values, path, ''),
+		value = getIn(state.values, path, ''),
 		...rest // handles children, fluid, placeholder, style and more <StrictInputProps>
 	} = props;
 	// console.debug('Input context', context);
 
 
 	// const changed = getIn(context.changes, path);
-	const errorMsg = getIn(context.errors, path);
-	const visited = getIn(context.visits, path);
+	const errorMsg = getIn(state.errors, path);
+	const visited = getIn(state.visits, path);
 	const error = !!(visited && errorMsg);
 	// console.debug('Input path', path, 'value', value, 'errorMsg', errorMsg, 'visited', visited, 'error', error);
 

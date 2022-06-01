@@ -13,7 +13,7 @@ export function VisitAllButton(props :{
     disabled = false
   } = props;
 
-  const [_context, dispatch] = getEnonicContext();
+  const {dispatch} = getEnonicContext();
 
   return <Button
 		color='olive'

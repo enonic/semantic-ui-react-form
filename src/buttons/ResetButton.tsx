@@ -19,10 +19,10 @@ export function ResetButton(props :Omit<
 }) {
 	//console.debug('ResetButton props', props);
 
-	const [context, dispatch] = getEnonicContext();
+	const {dispatch, state} = getEnonicContext();
 	//console.debug('ResetButton context', context);
 
-	const leaves = traverse(context.changes).reduce(function (acc, x) {
+	const leaves = traverse(state.changes).reduce(function (acc, x) {
     	if (this.notRoot && this.isLeaf && x === true) acc.push(x);
     	return acc;
 	}, []);

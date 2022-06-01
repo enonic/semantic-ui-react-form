@@ -30,13 +30,13 @@ type CheckboxProps<Value extends StrictCheckboxProps['value']> =
 export function Checkbox<
 	Value extends StrictCheckboxProps['value']
 >(props :CheckboxProps<Value>) {
-	const [context, dispatch] = getEnonicContext();
+	const {dispatch, state} = getEnonicContext();
 
 	const {
 		name, // name or path is required
 		parentPath,
 		path = parentPath ? `${parentPath}.${name}` : name, // name or path is required
-		checked = getIn(context.values, path), // avoid in ...rest
+		checked = getIn(state.values, path), // avoid in ...rest
 		defaultChecked, // = getIn(context.values, path),
 		value, // = getIn(context.values, path), // avoid in ...rest
 		...rest //defaultChecked

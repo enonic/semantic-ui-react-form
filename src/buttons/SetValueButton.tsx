@@ -23,7 +23,7 @@ export function SetValueButton<Value>(props :{
 	} = props;
 	//console.debug('SetValueButton path', path, 'value', value);
 
-	const [_context, dispatch] = getEnonicContext();
+	const {dispatch} = getEnonicContext();
 	//console.debug('SetValueButton context', context);
 
 	return <Button

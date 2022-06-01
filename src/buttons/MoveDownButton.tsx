@@ -18,7 +18,7 @@ export function MoveDownButton(props :{
 		path
 	} = props;
 
-	const [_context, dispatch] = getEnonicContext();
+	const {dispatch} = getEnonicContext();
 	//console.debug('MoveDownButton context', context);
 
 	return <Button

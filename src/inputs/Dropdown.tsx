@@ -32,14 +32,14 @@ export function Dropdown<
 >(props :DropdownProps<Value>) {
 	//console.debug('Dropdown props', props);
 
-	const [context, dispatch] = getEnonicContext();
+	const {dispatch, state} = getEnonicContext();
 	//console.debug('Dropdown context', context);
 
 	const {
 		name, // name or path is required
 		parentPath,
 		path = parentPath ? `${parentPath}.${name}` : name, // name or path is required
-		value = getIn(context.values, path),
+		value = getIn(state.values, path),
 		...rest
 	} = props;
 	/*console.debug('Dropdown',

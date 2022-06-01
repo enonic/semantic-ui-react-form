@@ -18,7 +18,7 @@ export function MoveUpButton(props :{
 		path
 	} = props;
 
-	const [_context, dispatch] = getEnonicContext();
+	const {dispatch} = getEnonicContext();
 	//console.debug('MoveUpButton context', context);
 
 	return <Button

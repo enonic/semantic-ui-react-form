@@ -19,7 +19,7 @@ export function SortButton(props :{
 
 	// TODO Make it possible to pass compare function
 
-	const [_context, dispatch] = getEnonicContext();
+	const {dispatch} = getEnonicContext();
 	//console.debug('SortButton context', context);
 
 	return <Button

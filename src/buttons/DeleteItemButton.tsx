@@ -23,7 +23,7 @@ export function DeleteItemButton(props :Omit<
 		...rest // disabled and more
 	} = props;
 
-	const [_context, dispatch] = getEnonicContext();
+	const {dispatch} = getEnonicContext();
 	//console.debug('DeleteItemButton context', context);
 
 	return <Button

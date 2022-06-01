@@ -9,7 +9,7 @@ export function DeleteButton(props :{
 } = {}) {
 	//console.debug('DeleteButton props', props);
 
-	const [_context, dispatch] = getEnonicContext();
+	const {dispatch} = getEnonicContext();
 	//console.debug('DeleteButton context', context);
 
 	const {disabled = false} = props;

@@ -18,7 +18,7 @@ export function SubmitButton(props :{
 }) {
 	// console.debug('SubmitButton props', props);
 
-	const [context, dispatch] = getEnonicContext();
+	const {dispatch, state} = getEnonicContext();
 	// console.debug('SubmitButton context', context);
 
 	/* const changesArr = traverse(context.changes).reduce(function (acc, x) {
@@ -28,7 +28,7 @@ export function SubmitButton(props :{
 	// console.dir(changesArr);
 
 	// console.debug('SubmitButton context.errors', context.errors);
-	const errorsArr = traverse(context.errors).reduce(function (acc, x) {
+	const errorsArr = traverse(state.errors).reduce(function (acc, x) {
     	if (this.notRoot && this.isLeaf) acc.push(x);
     	return acc;
 	}, []);

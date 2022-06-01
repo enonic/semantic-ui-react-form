@@ -9,7 +9,7 @@ export function ValidateFormButton(props :{
 } = {}) {
 	//console.debug('ValidateFormButton props', props);
 
-	const [_context, dispatch] = getEnonicContext();
+	const {dispatch} = getEnonicContext();
 	//console.debug('ValidateFormButton context', context);
 
 	const {disabled = false} = props;

@@ -19,13 +19,13 @@ export function List<
 }) {
 	// console.debug('List props', props);
 
-	const {context} = getEnonicContext();
+	const {state} = getEnonicContext();
 	// console.debug('List context', context);
 
 	const {
 		path,
 		render,
-		value = getIn(context, `values.${path}`, []) as Array<Item>
+		value = getIn(state, `values.${path}`, []) as Array<Item>
 	} = props;
 	// console.debug('List path', path, 'value', value);
 
