@@ -11,9 +11,20 @@ const ENTRY = {
 };
 const DEVTOOL = false;
 const EXTERNALS = {
-  react: 'React',
-  'react-dom': 'ReactDOM'
-  //'semantic-ui-react'
+  react: {
+    root: 'React',
+    commonjs2: 'react',
+    commonjs: 'react',
+    amd: 'react',
+    umd: 'react',
+  },
+  'react-dom': {
+    root: 'ReactDOM',
+    commonjs2: 'react-dom',
+    commonjs: 'react-dom',
+    amd: 'react-dom',
+    umd: 'react-dom',
+  }
 };
 const MODE = 'production';
 const TEST = /\.(tsx?|js)$/; // tsx, ts, js
