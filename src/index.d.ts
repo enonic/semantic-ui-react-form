@@ -41,7 +41,7 @@ export namespace SemanticUiReactForm {
   }
 
   export type SetErrorAction = {
-    error :string, // TODO uncertain
+    error :string|AnyObject,
   	path :ActionPath,
     type :'SET_ERROR'
   }
@@ -77,8 +77,8 @@ export namespace SemanticUiReactForm {
 
   export type SetVisitedFunctionParams = {
   	path :ActionPath,
-    validate :boolean
-    value ?:boolean
+    validate ?:boolean
+    value ?:boolean|AnyObject
   }
 
   export type SetVisitedAction = SetVisitedFunctionParams & {

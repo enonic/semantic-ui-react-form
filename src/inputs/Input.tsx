@@ -22,6 +22,7 @@ type LimitedStrictInputProps = Omit<
 type OptionalProps<Value> = {
 	parentPath ?:string
 	placeholder ?:string
+	style?: React.CSSProperties // For some reason doesn't exist on StrictInputProps
 	validateOnBlur ?:boolean
 	validateOnChange ?:boolean
 	visitOnChange ?:boolean
@@ -56,7 +57,7 @@ export function Input<Value>(props :InputProps<Value>) {
 		validateOnChange = true,
 		visitOnChange = true,
 		value = getIn(context.values, path, ''),
-		...rest // handles children, fluid, placeholder and more <StrictInputProps>
+		...rest // handles children, fluid, placeholder, style and more <StrictInputProps>
 	} = props;
 	// console.debug('Input context', context);
 

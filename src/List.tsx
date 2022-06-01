@@ -14,7 +14,7 @@ export function List<
 	Item extends unknown = unknown
 >(props :{
 	path :SemanticUiReactForm.ActionPath,
-	render :(value :Array<Item>) => JSX.Element//React.ReactNode
+	render :(value :Array<Item>) => JSX.Element
 	value ?:Array<Item>
 }) {
 	// console.debug('List props', props);

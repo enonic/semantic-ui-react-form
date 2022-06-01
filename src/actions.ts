@@ -109,7 +109,7 @@ export const setError = ({
 	path,
 	error
 } :{
-	error :string, // TODO uncertain
+	error :string|AnyObject,
 	path :SemanticUiReactForm.ActionPath
 }) :SemanticUiReactForm.SetErrorAction => ({
 	error,
