@@ -47,7 +47,7 @@ export function Input<Value>(props :InputProps<Value>) {
 	// console.debug('Input props', props);
 
 	const {dispatch, state} = getEnonicContext();
-	// console.debug('Input context', context);
+	//console.debug('Input state', state);
 
 	const {
 		name, // name or path is required
@@ -59,7 +59,7 @@ export function Input<Value>(props :InputProps<Value>) {
 		value = getIn(state.values, path, ''),
 		...rest // handles children, fluid, placeholder, style and more <StrictInputProps>
 	} = props;
-	// console.debug('Input context', context);
+	//console.debug('Input path', path, 'value', value);
 
 
 	// const changed = getIn(context.changes, path);

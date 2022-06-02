@@ -12,12 +12,12 @@ export const EnonicContext = React.createContext(undefined);
 
 
 export function createEnonicContext<
-	Values extends AnyObject,
-	StateType extends SemanticUiReactForm.State<Values> = SemanticUiReactForm.State<Values>,
-	ActionType extends SemanticUiReactForm.Action = SemanticUiReactForm.Action
+	Values extends AnyObject
 >(
-	reducer: React.Reducer<StateType, ActionType>,
-  initialState: StateType,
+	reducer: React.Reducer<
+		SemanticUiReactForm.State<Values>, SemanticUiReactForm.Action
+	>,
+  initialState: SemanticUiReactForm.State<Values>,
 ) {
 	/*const defaultDispatch: React.Dispatch<ActionType> = () => initialState // we never actually use this
 	const ctx = React.createContext({
@@ -26,7 +26,9 @@ export function createEnonicContext<
   });*/
 	const ctx = EnonicContext;
 	function Provider(props: React.PropsWithChildren<{}>) {
-    const [state, dispatch] = React.useReducer<React.Reducer<StateType, ActionType>>(reducer, initialState);
+    const [state, dispatch] = React.useReducer<React.Reducer<
+			SemanticUiReactForm.State<Values>, SemanticUiReactForm.Action>
+		>(reducer, initialState);
     return <ctx.Provider value={{ state, dispatch }} {...props} />
   }
   return [ctx, Provider] as const;
@@ -51,9 +53,11 @@ export function EnonicProviderComponent<
 }
 
 
-export function getEnonicContext/*<
+export function getEnonicContext<
 	Values extends AnyObject
->*/() {
-	//return React.useContext<SemanticUiReactForm.State<Values>>(enonicContext);
-	return React.useContext(EnonicContext);
+>() {
+	return React.useContext<{
+		dispatch :React.Dispatch<SemanticUiReactForm.Action>
+		state :SemanticUiReactForm.State<Values>
+	}>(EnonicContext);
 }
