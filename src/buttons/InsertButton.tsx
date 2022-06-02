@@ -1,16 +1,18 @@
+import type {StrictButtonProps} from 'semantic-ui-react';
+
+
 import {Button, Icon} from 'semantic-ui-react';
 import {getEnonicContext} from '../Context';
 import {insert} from '../actions';
 
 
-export function InsertButton<Value>(props :{
+export function InsertButton<Value>(props :Omit<
+	StrictButtonProps,'onClick'|'type'
+> & {
 	// Required
 	path :string
 	value :Value
 	// Optional
-	children ?:React.ReactNode
-	disabled ?:boolean
-	icon ?:boolean
 	index ?:number
 }) {
 	//console.debug('InsertButton props', props);

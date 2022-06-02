@@ -1,16 +1,18 @@
+import type {StrictButtonProps} from 'semantic-ui-react';
+
+
 import {Button, Icon} from 'semantic-ui-react';
 
 import {getEnonicContext} from '../Context';
 import {setValue} from '../actions';
 
 
-export function SetValueButton<Value>(props :{
+export function SetValueButton<Value>(props :Omit<
+	StrictButtonProps,'onClick'|'type'
+> & {
 	// Required
 	path :string
 	value :Value
-	// Optional
-	children ?:React.ReactNode
-	icon ?:boolean
 }) {
 	//console.debug('SetValueButton props', props);
 	const {

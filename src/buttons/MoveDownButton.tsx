@@ -1,14 +1,17 @@
-import {Button, Icon} from 'semantic-ui-react';
+import type {StrictButtonProps} from 'semantic-ui-react';
 
+
+import {Button, Icon} from 'semantic-ui-react';
 import {getEnonicContext} from '../Context';
 import {moveDown} from '../actions';
 
 
-export function MoveDownButton(props :{
+export function MoveDownButton(props :Omit<
+	StrictButtonProps,'onClick'|'type'
+> & {
 	// Required
 	path :string
 	// Optional
-	disabled ?:boolean
 	index ?:number
 }) {
 	//console.debug('MoveDownButton props', props);
