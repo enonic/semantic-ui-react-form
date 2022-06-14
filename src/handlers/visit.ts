@@ -6,7 +6,8 @@ import type {
 
 
 // import deepEqual from 'fast-deep-equal';
-import {setIn} from '@enonic/js-utils';
+//import {setIn} from '@enonic/js-utils'; // Doesn't handle array as root item
+import setIn from 'set-value'; // Handles array as root item
 
 import {validateForm} from './validateForm';
 import {deReference} from '../utils/deReference';

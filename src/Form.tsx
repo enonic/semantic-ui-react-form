@@ -74,107 +74,121 @@ import { deReference } from './utils/deReference';
 
 
 export function Form<
-  Values extends AnyObject // Required, but limited
+	Values extends AnyObject // Required, but limited
 >(props :{
-  initialValues :Values|(() => Values),
-  afterValidate ?:SemanticUiReactForm.AfterValidateFunction<SemanticUiReactForm.State<Values>>,
-  afterVisit ?:SemanticUiReactForm.AfterVisitFunction<SemanticUiReactForm.State<Values>>,
-  children ?:React.ReactNode,
-  onChange ?:SemanticUiReactForm.OnChangeFunction<Values>,
-  onDelete ?:SemanticUiReactForm.OnDeleteFunction<Values>,
-  onSubmit ?:SemanticUiReactForm.OnSubmitFunction<Values>,
-  validateOnInit ?:boolean,
-  schema ?:SemanticUiReactForm.Schema
+	initialValues :Values|(() => Values),
+	afterValidate ?:SemanticUiReactForm.AfterValidateFunction<SemanticUiReactForm.State<Values>>,
+	afterVisit ?:SemanticUiReactForm.AfterVisitFunction<SemanticUiReactForm.State<Values>>,
+	children ?:React.ReactNode,
+	onChange ?:SemanticUiReactForm.OnChangeFunction<Values>,
+	onDelete ?:SemanticUiReactForm.OnDeleteFunction<Values>,
+	onSubmit ?:SemanticUiReactForm.OnSubmitFunction<Values>,
+	validateOnInit ?:boolean,
+	schema ?:SemanticUiReactForm.Schema
 }) {
-  // console.debug('Form props', props);
+	// console.debug('Form props', props);
 
-  const {
-    afterValidate = (
-      // Prefixing with underscore to avoid "is declared but its value is never read"
-      _currentState :SemanticUiReactForm.State<Values>
-    ) => {
-      /* no-op */
-    },
-    afterVisit = (
-      // Prefixing with underscore to avoid "is declared but its value is never read"
-      _currentState :SemanticUiReactForm.State<Values>
-    ) => {
-      /* no-op */
-    },
-    children,
-    onChange = () => {
-      /* no-op */
-    },
-    onDelete = () => {
-      /* no-op */
-    },
-    onSubmit = () => {
-      /* no-op */
-    },
-    validateOnInit = true
-  } = props;
+	const {
+		afterValidate = (
+			// Prefixing with underscore to avoid "is declared but its value is never read"
+			_currentState :SemanticUiReactForm.State<Values>
+		) => {
+			/* no-op */
+		},
+		afterVisit = (
+			// Prefixing with underscore to avoid "is declared but its value is never read"
+			_currentState :SemanticUiReactForm.State<Values>
+		) => {
+			/* no-op */
+		},
+		children,
+		onChange = () => {
+			/* no-op */
+		},
+		onDelete = () => {
+			/* no-op */
+		},
+		onSubmit = () => {
+			/* no-op */
+		},
+		validateOnInit = true
+	} = props;
 
-  // const initialSchema = props.schema ? props.schema : {}; // warning no deref!
-  const initialSchema = props.schema ? deReference(props.schema) : {}; // deref
-  // console.debug('Form initialSchema', initialSchema);
+	// const initialSchema = props.schema ? props.schema : {}; // warning no deref!
+	const initialSchema = props.schema ? deReference(props.schema) : {}; // deref
+	// console.debug('Form initialSchema', initialSchema);
 
-  const initialValues = deReference(
-    (isFunction(props.initialValues)
-      ? props.initialValues()
-      : props.initialValues) as Values
-  );
+	const initialValues = deReference(
+		(
+			isFunction(props.initialValues)
+				? props.initialValues()
+				: props.initialValues
+		) as Values
+	);
 
-  /* function validate({ schema, values }) {
-    // console.debug('Form validate schema', schema);
-    const errors = {};
-    traverse(schema).forEach(function(x) {
-      // fat-arrow destroys this
-      if (this.notRoot && this.isLeaf && isFunction(x)) {
-        const { path } = this; // console.debug('path', path);
-        const value = getIn(values, path); // console.debug('value', value);
-        const newError = x(value); // console.debug('newError', newError);
-        newError && setIn(errors, path, newError);
-      }
-    });
-    return errors;
-  } // validate */
+	/* function validate({ schema, values }) {
+	// console.debug('Form validate schema', schema);
+	const errors = {};
+	traverse(schema).forEach(function(x) {
+		// fat-arrow destroys this
+		if (this.notRoot && this.isLeaf && isFunction(x)) {
+			const { path } = this; // console.debug('path', path);
+			const value = getIn(values, path); // console.debug('value', value);
+			const newError = x(value); // console.debug('newError', newError);
+			newError && setIn(errors, path, newError);
+			}
+		});
+		return errors;
+	} // validate */
 
-  let initialState :SemanticUiReactForm.State<Values> = {
-    changes: {},
-    errors: {},
-    schema: initialSchema,
-    values: initialValues,
-    visits: {}
-  };
-  // console.debug('Form initialState', initialState);
+	let initialState :SemanticUiReactForm.State<Values> = {
+		changes: {},
+		errors: {},
+		schema: initialSchema,
+		values: initialValues,
+		visits: {}
+	};
+	// console.debug('Form initialState', initialState);
 
-  const isFirstRun = React.useRef(true);
-  if (isFirstRun.current) {
-    isFirstRun.current = false;
-    if (validateOnInit) {
-      initialState = validateForm({
-        afterValidate,
-        state: initialState,
-        visitAllFields: false
-      });
-    }
-  }
+	React.useEffect(() => {
+		console.debug('In useEffect validateOnInit', validateOnInit);
+		if (validateOnInit) {
+			initialState = validateForm({
+				afterValidate,
+				state: initialState,
+				visitAllFields: false
+			});
+		}
+	},[]);
 
-  const reducer = reducerGenerator<Values>({
-    afterValidate,
-    afterVisit,
-    initialState,
-    onChange,
-    onDelete,
-    onSubmit
-  });
+	/*const isFirstRun = React.useRef(true);
+	if (isFirstRun.current) {
+		// Warning: Cannot update a component (`Unknown`) while rendering a different component (`Collector`). To locate the bad setState() call inside `Collector`
+		isFirstRun.current = false;
+		if (validateOnInit) {
+			initialState = validateForm({
+				afterValidate,
+				state: initialState,
+				visitAllFields: false
+			});
+		}
+	}*/
 
-  return (
-    <EnonicProviderComponent<Values>
-      initialState={initialState}
-      reducer={reducer}
-    >
-      {children}
-    </EnonicProviderComponent>
-  );
+	const reducer = reducerGenerator<Values>({
+		afterValidate,
+		afterVisit,
+		initialState,
+		onChange,
+		onDelete,
+		onSubmit
+	});
+
+	return (
+		<EnonicProviderComponent<Values>
+			initialState={initialState}
+			reducer={reducer}
+		>
+			{children}
+		</EnonicProviderComponent>
+	);
 } // Form

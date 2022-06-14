@@ -8,9 +8,10 @@ import type {
 import deepEqual from 'fast-deep-equal';
 import {
   getIn,
-  isFunction,
-  setIn
+  isFunction//,
+  //setIn // Doesn't handle array as root item
 } from '@enonic/js-utils';
+import setIn from 'set-value'; // Handles array as root item
 import traverse from 'traverse';
 
 import {
@@ -180,7 +181,7 @@ export function reducerGenerator<
           afterValidate,
           afterVisit,
           initialState,
-          //onChange, // Why was this ever here? Copy paste mistake?
+          onChange,
           state
         });
       }

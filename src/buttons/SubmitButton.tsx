@@ -29,10 +29,12 @@ export function SubmitButton(props :{
 
 	// console.debug('SubmitButton context.errors', context.errors);
 	const errorsArr = traverse(state.errors).reduce(function (acc, x) {
-    	if (this.notRoot && this.isLeaf) acc.push(x);
-    	return acc;
+		if (this.notRoot && this.isLeaf) {
+			acc.push(x);
+		}
+		return acc;
 	}, []);
- 	// console.dir(errorsArr);
+	// console.dir(errorsArr);
 
 	const {
 		children = <>

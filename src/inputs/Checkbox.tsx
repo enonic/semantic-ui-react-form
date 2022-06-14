@@ -37,8 +37,8 @@ export function Checkbox<
 		parentPath,
 		path = parentPath ? `${parentPath}.${name}` : name, // name or path is required
 		checked = getIn(state.values, path), // avoid in ...rest
-		defaultChecked, // = getIn(context.values, path),
-		value, // = getIn(context.values, path), // avoid in ...rest
+		//defaultChecked, // = getIn(context.values, path),
+		//value, // = getIn(context.values, path), // avoid in ...rest
 		...rest //defaultChecked
 	} = props;
 	/*console.debug('Checkbox',

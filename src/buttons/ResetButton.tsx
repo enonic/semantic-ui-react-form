@@ -23,10 +23,12 @@ export function ResetButton(props :Omit<
 	//console.debug('ResetButton context', context);
 
 	const leaves = traverse(state.changes).reduce(function (acc, x) {
-    	if (this.notRoot && this.isLeaf && x === true) acc.push(x);
-    	return acc;
+		if (this.notRoot && this.isLeaf && x === true) {
+			acc.push(x);
+		}
+		return acc;
 	}, []);
- 	//console.dir(leaves);
+	//console.dir(leaves);
 
 	const {
 		children=<><Icon name='history'/>Reset</>,

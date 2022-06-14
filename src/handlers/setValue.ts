@@ -5,9 +5,10 @@ import type {
 
 
 import {
-  getIn,
-  setIn
+  getIn//,
+  //setIn // Doesn't handle array as root item
 } from '@enonic/js-utils';
+import setIn from 'set-value'; // Handles array as root item
 import {validateForm} from './validateForm';
 import {visit as setVisited} from './visit';
 import {deReference} from '../utils/deReference';

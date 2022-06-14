@@ -1,21 +1,36 @@
 module.exports = {
   extends: [
-    //'eslint:recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:react/recommended'//,
+    'eslint:recommended',
     //'airbnb-base',
     //'prettier'
+    'plugin:@typescript-eslint/eslint-recommended',
+		'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'plugin:jsx-a11y/recommended',
+    'plugin:react-hooks/recommended'
   ], // extends
   globals: {
     React: false
   },
-  parser: 'babel-eslint',
+  overrides: [{
+		files: [
+			'**/*.ts',
+			'**/*.tsx'
+		]
+	}],
+  parser: '@typescript-eslint/parser',
   plugins: [
-    'jsx-a11y'//,
-    //'react'//,
+    'react',
+    'jsx-a11y',
     //'prettier'
+    '@typescript-eslint'
   ], // plugins
   rules: {
+	'@typescript-eslint/no-unused-vars': ['error', {
+		argsIgnorePattern: '^_',
+		//caughtErrorsIgnorePattern: '^_',
+		//destructuredArrayIgnorePattern: '^_'
+	}],
     'comma-dangle': [ 'error', {
         'arrays': 'never',
         'objects': 'never',
@@ -28,22 +43,29 @@ module.exports = {
     'no-unused-expressions': ['error', { allowShortCircuit: true }],
     'prettier/prettier': [ 'off' ],
     'react/prop-types': [ 'off' ],
-    'react/react-in-jsx-scope': [ 'off' ]
+    'react/react-in-jsx-scope': [ 'off' ],
   }, // rules
   settings: {
     'import/extensions': [
       '.es',
       '.js',
-      '.jsx'
+      '.jsx',
+      '.ts',
+      '.tsx'
     ],
     'import/resolver': {
       node: {
         extensions: [
           '.es',
           '.js',
-          '.jsx'
+          '.jsx',
+          '.ts',
+          '.tsx'
         ]
       }
-    }
+    },
+    react: {
+			version: 'detect'
+		}
   } // settings
 } // module.exports

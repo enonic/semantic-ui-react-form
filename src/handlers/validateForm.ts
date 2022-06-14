@@ -7,9 +7,10 @@ import type {
 import {
   getIn,
   isFunction,
-  isObject,
-  setIn
+  isObject//,
+  //setIn // Doesn't handle array as root item
 } from '@enonic/js-utils';
+import setIn from 'set-value'; // Handles array as root item
 import traverse from 'traverse';
 import { deReference } from '../utils/deReference';
 

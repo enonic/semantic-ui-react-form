@@ -38,6 +38,7 @@
 			"lodash.clonedeep",
 			"prop-types",
 			"react",
+			"set-value",
 			"traverse"
 		]
   },

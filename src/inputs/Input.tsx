@@ -90,8 +90,10 @@ export function Input<Value>(props :InputProps<Value>) {
 		{error && <Message icon negative>
 			<Icon name='warning'/>
 			<Message.Content>
-				<Message.Header>{path}</Message.Header>
-				{errorMsg}
+				<>
+					<Message.Header>{path}</Message.Header>
+					{errorMsg}
+				</>
 			</Message.Content>
 		</Message>}
 	</>;
